@@ -1,0 +1,1077 @@
+# TailAdmin React Dashboard - Cursor AI Rules
+
+This file contains project-specific rules and patterns for AI assistants working on this codebase.
+
+---
+
+## Section A: Project Overview
+
+### Project Name
+**TailAdmin React** - Free React Tailwind Admin Dashboard Template
+
+### Tech Stack (from package.json)
+- **React**: 19.0.0
+- **TypeScript**: 5.7.2
+- **Tailwind CSS**: 4.0.8
+- **Vite**: 6.1.0 (build tool)
+- **React Router**: 7.1.5
+- **TypeScript ESLint**: 8.22.0
+- **ApexCharts**: 4.1.0 (charts)
+- **FullCalendar**: 6.1.15 (calendar)
+- **Flatpickr**: 4.6.13 (date picker)
+- **React Helmet Async**: 2.0.5 (SEO)
+
+### Main Features
+- Dark mode support
+- Responsive design (mobile, tablet, desktop)
+- Collapsible sidebar navigation
+- Pre-built UI components (buttons, forms, tables, charts)
+- Calendar with drag-and-drop
+- Authentication pages
+- TypeScript for type safety
+
+### Architecture
+- **Component-based architecture** with functional components
+- **Context API** for global state (Theme, Sidebar)
+- **React Router** for navigation
+- **Tailwind CSS** for styling (utility-first)
+- **Vite** for fast development and building
+
+---
+
+## Section B: Project Structure
+
+```
+src/
+├── components/          # Reusable UI components
+│   ├── auth/           # Authentication forms (SignIn, SignUp)
+│   ├── charts/         # Chart components (bar, line)
+│   ├── common/         # Shared utilities (PageMeta, ScrollToTop, ThemeToggle)
+│   ├── ecommerce/      # Dashboard-specific widgets
+│   ├── form/           # Form inputs and elements
+│   ├── header/         # Header components (notifications, user menu)
+│   ├── tables/         # Table components
+│   ├── ui/             # Basic UI elements (button, badge, alert, dropdown, modal)
+│   └── UserProfile/    # User profile components
+│
+├── context/            # React Context providers
+│   ├── SidebarContext.tsx    # Sidebar state (expanded, mobile open)
+│   └── ThemeContext.tsx       # Theme state (light/dark)
+│
+├── hooks/              # Custom React hooks
+│   ├── useGoBack.ts    # Navigation hook
+│   └── useModal.ts     # Modal state hook
+│
+├── icons/              # SVG icon components
+│   └── index.ts        # Icon exports
+│
+├── layout/             # Layout components
+│   ├── AppLayout.tsx   # Main layout wrapper (sidebar + header)
+│   ├── AppHeader.tsx   # Top navigation bar
+│   ├── AppSidebar.tsx  # Left sidebar navigation
+│   ├── Backdrop.tsx    # Mobile sidebar overlay
+│   └── SidebarWidget.tsx
+│
+├── pages/              # Page components (full views)
+│   ├── AuthPages/      # Sign in/up pages
+│   ├── Dashboard/      # Dashboard page
+│   ├── Charts/         # Chart pages
+│   ├── Forms/          # Form examples
+│   ├── Tables/         # Table examples
+│   ├── UiElements/     # UI component examples
+│   └── OtherPage/      # 404, etc.
+│
+├── App.tsx             # Main app component (routing)
+├── main.tsx            # Entry point
+└── index.css           # Global styles + Tailwind config
+```
+
+### Directory Purposes
+
+- **`components/`**: Reusable building blocks used across pages
+- **`pages/`**: Full-page views (one per route)
+- **`layout/`**: Structure that wraps pages (sidebar, header)
+- **`context/`**: Global state management (React Context)
+- **`hooks/`**: Reusable logic (custom hooks)
+- **`icons/`**: SVG icon components (imported as React components)
+
+---
+
+## Section C: Technology-Specific Rules
+
+### React Patterns
+
+#### Component Structure
+✅ **ALWAYS use functional components**
+✅ **ALWAYS use TypeScript**
+✅ **ALWAYS define props interface above component**
+✅ **ALWAYS use React.FC type annotation**
+
+```typescript
+// ✅ CORRECT - Standard component pattern
+interface ButtonProps {
+  children: ReactNode;
+  variant?: "primary" | "outline";
+  onClick?: () => void;
+}
+
+const Button: React.FC<ButtonProps> = ({ children, variant = "primary", onClick }) => {
+  return <button onClick={onClick}>{children}</button>;
+};
+
+export default Button;
+```
+
+#### Hooks Usage
+✅ **Use hooks at the top of component** (after props destructuring)
+✅ **Use custom hooks from `src/hooks/`** when available
+✅ **Use Context hooks** (`useTheme`, `useSidebar`) for global state
+
+```typescript
+// ✅ CORRECT - Hooks pattern
+const MyComponent: React.FC<Props> = ({ prop1 }) => {
+  const { theme, toggleTheme } = useTheme();
+  const [localState, setLocalState] = useState(false);
+  const { isOpen, openModal, closeModal } = useModal();
+  
+  useEffect(() => {
+    // side effects
+  }, []);
+  
+  return <div>...</div>;
+};
+```
+
+#### State Management
+- **Global State**: Use React Context (`ThemeContext`, `SidebarContext`)
+- **Local State**: Use `useState` hook
+- **Form State**: Use `useState` (no form library currently)
+- **Server State**: Not implemented yet (use `useState` + `useEffect` for now)
+
+### Router Library (React Router v7)
+
+✅ **Import from "react-router"** (not "react-router-dom")
+✅ **Use `<Link>` for navigation**
+✅ **Use `<Outlet>` in layout components**
+✅ **Use `useNavigate()` for programmatic navigation**
+✅ **Use `useLocation()` for current route**
+
+```typescript
+// ✅ CORRECT - Router imports
+import { Link, useNavigate, useLocation } from "react-router";
+
+// ✅ CORRECT - Navigation
+<Link to="/profile">Go to Profile</Link>
+
+// ✅ CORRECT - Programmatic navigation
+const navigate = useNavigate();
+navigate("/profile");
+```
+
+### Styling Solution (Tailwind CSS v4)
+
+✅ **ALWAYS use Tailwind utility classes** (no custom CSS files)
+✅ **ALWAYS include dark mode variants** using `dark:` prefix
+✅ **ALWAYS use responsive breakpoints** (`sm:`, `md:`, `lg:`, `xl:`)
+✅ **Use custom utilities** from `index.css` when available (`menu-item`, `custom-scrollbar`)
+
+```typescript
+// ✅ CORRECT - Tailwind classes with dark mode
+<div className="bg-white dark:bg-gray-900 text-gray-800 dark:text-white/90 p-4 rounded-lg">
+  Content
+</div>
+
+// ✅ CORRECT - Responsive design
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+  Items
+</div>
+```
+
+**Color System**: Use theme colors from `index.css`:
+- `brand-*` (primary brand colors)
+- `success-*`, `error-*`, `warning-*`, `info-*`
+- `gray-*` (grayscale)
+- `blue-light-*`, `orange-*`
+
+### Form Handling
+
+✅ **Use controlled components** with `useState`
+✅ **Use form input components** from `src/components/form/`
+✅ **Use Flatpickr** for date inputs (already configured)
+
+```typescript
+// ✅ CORRECT - Form pattern
+const [formData, setFormData] = useState({ name: "", email: "" });
+
+const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  setFormData({ ...formData, [e.target.name]: e.target.value });
+};
+
+<InputField
+  name="name"
+  value={formData.name}
+  onChange={handleChange}
+/>
+```
+
+### Data Fetching
+
+⚠️ **Currently no API layer** - uses static/mock data
+✅ **When adding API calls**, create `src/services/` or `src/api/` folder
+✅ **Use `fetch` or `axios`** (axios not installed yet)
+✅ **Handle loading and error states** with `useState`
+
+```typescript
+// ✅ CORRECT - Future API pattern
+const [data, setData] = useState([]);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState(null);
+
+useEffect(() => {
+  async function fetchData() {
+    try {
+      const response = await fetch('/api/data');
+      const result = await response.json();
+      setData(result);
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
+  }
+  fetchData();
+}, []);
+```
+
+---
+
+## Section D: File and Naming Conventions
+
+### Component File Naming
+✅ **PascalCase for component files**: `Button.tsx`, `UserProfile.tsx`, `MonthlySalesChart.tsx`
+✅ **Some folders use `index.tsx`**: `src/components/ui/modal/index.tsx`, `src/components/ui/table/index.tsx`
+✅ **File extension**: Always `.tsx` for React components
+
+**Examples from codebase**:
+- `src/components/ui/button/Button.tsx`
+- `src/components/ecommerce/MonthlySalesChart.tsx`
+- `src/pages/UiElements/Alerts.tsx`
+- `src/layout/AppHeader.tsx`
+
+### Folder Structure for Components
+✅ **One component per file** (except index.tsx files)
+✅ **Group related components** in folders:
+  - `src/components/ui/button/Button.tsx`
+  - `src/components/ui/alert/Alert.tsx`
+  - `src/components/form/input/InputField.tsx`
+
+### Variable Naming
+✅ **camelCase for variables**: `isOpen`, `userName`, `handleClick`
+✅ **PascalCase for components**: `Button`, `UserProfile`
+✅ **UPPER_CASE for constants**: `API_BASE_URL` (if needed)
+
+### Constants Naming
+✅ **Use camelCase** for most constants
+✅ **Use UPPER_CASE** only for true constants (rare in this codebase)
+
+### File Extensions
+- **`.tsx`**: React components
+- **`.ts`**: TypeScript files (utilities, types, hooks)
+- **`.css`**: Styles (only `index.css` currently)
+- **`.svg`**: Icons (imported as React components)
+
+---
+
+## Section E: Component Creation Rules
+
+### Template for New Component
+
+```typescript
+// src/components/ui/mycomponent/MyComponent.tsx
+import { ReactNode } from "react";
+
+interface MyComponentProps {
+  // Required props first
+  title: string;
+  // Optional props with defaults
+  variant?: "primary" | "secondary";
+  children?: ReactNode;
+  className?: string;
+  onClick?: () => void;
+}
+
+const MyComponent: React.FC<MyComponentProps> = ({
+  title,
+  variant = "primary",
+  children,
+  className = "",
+  onClick,
+}) => {
+  return (
+    <div className={`base-styles ${variant}-styles ${className}`}>
+      <h2>{title}</h2>
+      {children}
+    </div>
+  );
+};
+
+export default MyComponent;
+```
+
+### Required File Structure
+1. **Import statements** (React, types, other components)
+2. **Interface definition** for props
+3. **Component definition** with React.FC
+4. **Default export**
+
+### Prop Validation
+✅ **Use TypeScript interfaces** (not PropTypes)
+✅ **Mark optional props with `?`**
+✅ **Provide default values** in destructuring
+✅ **Use union types** for variants: `"primary" | "secondary"`
+
+### Export Pattern
+✅ **Default export for components**: `export default Button;`
+✅ **Named exports for hooks/utilities**: `export { useModal };`
+✅ **Named exports for multiple items**: Icons in `src/icons/index.ts`
+
+### Component Types Location
+
+| Component Type | Location |
+|---------------|----------|
+| **UI Elements** (Button, Badge, Alert) | `src/components/ui/[name]/` |
+| **Form Elements** | `src/components/form/` |
+| **Charts** | `src/components/charts/` |
+| **Dashboard Widgets** | `src/components/ecommerce/` |
+| **Layout Components** | `src/layout/` |
+| **Page Components** | `src/pages/` |
+| **Common Utilities** | `src/components/common/` |
+
+---
+
+## Section F: Styling Rules
+
+### How to Apply Styles
+✅ **ALWAYS use Tailwind utility classes** in `className` prop
+✅ **NEVER create separate CSS files** for components
+✅ **Use template literals** for conditional classes
+✅ **Use `clsx` or `tailwind-merge`** if needed (installed but rarely used)
+
+```typescript
+// ✅ CORRECT - Tailwind classes
+<div className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-white/[0.03]">
+  Content
+</div>
+
+// ✅ CORRECT - Conditional classes
+<div className={`base-class ${isActive ? "active-class" : "inactive-class"}`}>
+  Content
+</div>
+```
+
+### Theme Variables Location
+**File**: `src/index.css`
+
+All theme variables are defined in the `@theme` block:
+- Colors: `--color-brand-500`, `--color-success-500`, etc.
+- Fonts: `--font-outfit`
+- Breakpoints: `--breakpoint-sm`, `--breakpoint-md`, etc.
+- Shadows: `--shadow-theme-sm`, `--shadow-theme-md`, etc.
+
+### Color Palette
+Use these color tokens (defined in `index.css`):
+- **Brand**: `brand-25` through `brand-950` (primary brand colors)
+- **Success**: `success-*` (green)
+- **Error**: `error-*` (red)
+- **Warning**: `warning-*` (orange/yellow)
+- **Info**: `blue-light-*` (blue)
+- **Gray**: `gray-25` through `gray-950`
+
+**Usage**: `bg-brand-500`, `text-success-600`, `border-error-500`
+
+### Responsive Breakpoints
+From `index.css`:
+- `2xsm`: 375px
+- `xsm`: 425px
+- `sm`: 640px
+- `md`: 768px
+- `lg`: 1024px
+- `xl`: 1280px
+- `2xl`: 1536px
+- `3xl`: 2000px
+
+**Usage**: `md:grid-cols-2`, `lg:ml-[290px]`, `xl:col-span-5`
+
+### Class Naming Conventions
+✅ **Use Tailwind utilities directly** (no custom class names)
+✅ **Use custom utilities** from `index.css` when available:
+  - `menu-item`, `menu-item-active`
+  - `custom-scrollbar`, `no-scrollbar`
+  - `dropdown-toggle` (for click-outside detection)
+
+### Dark Mode
+✅ **ALWAYS include dark mode variants** for colors and backgrounds
+✅ **Use `dark:` prefix** for dark mode styles
+
+```typescript
+// ✅ CORRECT - Dark mode pattern
+<div className="bg-white dark:bg-gray-900 text-gray-800 dark:text-white/90 border-gray-200 dark:border-gray-800">
+  Content
+</div>
+```
+
+---
+
+## Section G: State Management Rules
+
+### Global State Location
+✅ **Use React Context** in `src/context/`
+✅ **Current contexts**:
+  - `ThemeContext` - Theme (light/dark) with localStorage persistence
+  - `SidebarContext` - Sidebar state (expanded, mobile open, active item)
+
+**How to use**:
+```typescript
+import { useTheme } from "../context/ThemeContext";
+import { useSidebar } from "../context/SidebarContext";
+
+const { theme, toggleTheme } = useTheme();
+const { isExpanded, toggleSidebar } = useSidebar();
+```
+
+### Local State Location
+✅ **Use `useState` hook** in component
+✅ **Keep state close to where it's used**
+✅ **Lift state up** only when needed by multiple components
+
+### How to Update State
+✅ **Use setter functions** from `useState`
+✅ **Use functional updates** for state based on previous state
+✅ **Use Context methods** for global state updates
+
+```typescript
+// ✅ CORRECT - State updates
+const [count, setCount] = useState(0);
+setCount(count + 1); // Simple update
+setCount(prev => prev + 1); // Functional update (better)
+
+// ✅ CORRECT - Context updates
+const { toggleTheme } = useTheme();
+toggleTheme(); // Updates global theme state
+```
+
+### Async State Handling
+✅ **Use `useState` for loading/error states**
+✅ **Use `useEffect` for async operations**
+
+```typescript
+// ✅ CORRECT - Async state pattern
+const [data, setData] = useState(null);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState(null);
+
+useEffect(() => {
+  async function fetchData() {
+    try {
+      setLoading(true);
+      const result = await fetch('/api/data');
+      setData(result);
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
+  }
+  fetchData();
+}, []);
+```
+
+---
+
+## Section H: API Integration Rules
+
+### Where API Calls Should Be Placed
+⚠️ **Currently no API layer exists** - project uses static data
+✅ **When adding API**, create:
+  - `src/services/api.ts` - API functions
+  - `src/services/types.ts` - API response types (optional)
+
+### Error Handling Pattern
+✅ **Use try/catch blocks** for async operations
+✅ **Set error state** with `useState`
+✅ **Display error messages** to user
+
+```typescript
+// ✅ CORRECT - Error handling
+const [error, setError] = useState<string | null>(null);
+
+try {
+  const response = await fetch('/api/data');
+  if (!response.ok) throw new Error('Failed to fetch');
+  const data = await response.json();
+} catch (err) {
+  setError(err instanceof Error ? err.message : 'An error occurred');
+}
+```
+
+### Loading State Handling
+✅ **Use `useState` for loading state**
+✅ **Show loading indicator** while fetching
+✅ **Set loading to false** in finally block
+
+```typescript
+// ✅ CORRECT - Loading state
+const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+  async function load() {
+    setLoading(true);
+    try {
+      // fetch data
+    } finally {
+      setLoading(false);
+    }
+  }
+  load();
+}, []);
+
+if (loading) return <div>Loading...</div>;
+```
+
+### Base URL Configuration
+✅ **Use environment variables** when adding API
+✅ **Create `.env` file**:
+```
+VITE_API_URL=http://localhost:3000/api
+```
+
+✅ **Access in code**:
+```typescript
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+```
+
+**Note**: Variables must start with `VITE_` to be accessible in browser.
+
+### Request/Response Interceptors
+⚠️ **Not implemented yet** - add if using axios in future
+
+---
+
+## Section I: Routing Rules
+
+### How to Add New Routes
+✅ **Edit `src/App.tsx`**
+✅ **Import the page component**
+✅ **Add route inside appropriate layout**
+
+```typescript
+// ✅ CORRECT - Adding route
+import MyNewPage from "./pages/MyNewPage";
+
+// Inside <Routes>:
+<Route element={<AppLayout />}>
+  <Route path="/my-new-page" element={<MyNewPage />} />
+</Route>
+```
+
+### Route File Location
+✅ **Routes defined in**: `src/App.tsx`
+✅ **Page components in**: `src/pages/`
+
+### Protected Route Pattern
+⚠️ **Not implemented yet** - all routes are public
+✅ **When adding auth**, create `ProtectedRoute` component:
+```typescript
+const ProtectedRoute = ({ children }: { children: ReactNode }) => {
+  const isAuthenticated = /* check auth */;
+  return isAuthenticated ? children : <Navigate to="/signin" />;
+};
+```
+
+### Navigation Component Location
+✅ **Sidebar navigation**: `src/layout/AppSidebar.tsx`
+✅ **Header navigation**: `src/layout/AppHeader.tsx`
+
+**To add menu item to sidebar**:
+Edit `src/layout/AppSidebar.tsx`, add to `navItems` or `othersItems` array:
+```typescript
+const navItems: NavItem[] = [
+  // ... existing items
+  {
+    icon: <YourIcon />,
+    name: "My Page",
+    path: "/my-page",
+  },
+];
+```
+
+---
+
+## Section J: Code Quality Standards
+
+### Import Ordering
+✅ **Follow this pattern** (from actual codebase):
+
+1. **React imports** (types first if using `import type`)
+2. **Third-party libraries**
+3. **Router imports**
+4. **Context/hooks imports**
+5. **Component imports** (relative paths)
+6. **Icon imports**
+7. **Type imports** (if separate)
+
+```typescript
+// ✅ CORRECT - Import order
+import { ReactNode } from "react";
+import { Link } from "react-router";
+import Chart from "react-apexcharts";
+import { useTheme } from "../context/ThemeContext";
+import { useModal } from "../hooks/useModal";
+import Button from "../components/ui/button/Button";
+import { PlusIcon } from "../icons";
+import type { ApexOptions } from "apexcharts";
+```
+
+### Error Handling Requirements
+✅ **Handle errors in async operations** (try/catch)
+✅ **Show user-friendly error messages**
+✅ **Log errors to console** for debugging
+
+### Comment Standards
+✅ **Use comments sparingly** - code should be self-documenting
+✅ **Comment complex logic** or non-obvious decisions
+✅ **Use JSDoc** for function documentation (optional)
+
+```typescript
+// ✅ CORRECT - Useful comment
+// Initialize with default events on mount
+useEffect(() => {
+  setEvents([...]);
+}, []);
+```
+
+### Function Size Guidelines
+✅ **Keep functions focused** - one responsibility
+✅ **Extract complex logic** to separate functions
+✅ **Use custom hooks** for reusable logic
+
+### Code Organization Principles
+✅ **One component per file**
+✅ **Group related code together**
+✅ **Extract constants** to top of file
+✅ **Keep component structure consistent**:
+  1. Imports
+  2. Types/Interfaces
+  3. Component definition
+  4. Export
+
+---
+
+## Section K: Common Workflows
+
+### Adding a New Page
+
+**Step 1**: Create page component
+```typescript
+// src/pages/MyNewPage.tsx
+import PageMeta from "../components/common/PageMeta";
+
+export default function MyNewPage() {
+  return (
+    <>
+      <PageMeta
+        title="My New Page | TailAdmin"
+        description="Description of my new page"
+      />
+      <div className="p-6">
+        <h1>My New Page</h1>
+      </div>
+    </>
+  );
+}
+```
+
+**Step 2**: Add route in `src/App.tsx`
+```typescript
+import MyNewPage from "./pages/MyNewPage";
+
+<Route path="/my-new-page" element={<MyNewPage />} />
+```
+
+**Step 3**: (Optional) Add to sidebar in `src/layout/AppSidebar.tsx`
+
+### Creating a New Reusable Component
+
+**Step 1**: Create component file
+```typescript
+// src/components/ui/mycomponent/MyComponent.tsx
+import { ReactNode } from "react";
+
+interface MyComponentProps {
+  title: string;
+  children?: ReactNode;
+}
+
+const MyComponent: React.FC<MyComponentProps> = ({ title, children }) => {
+  return (
+    <div className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-white/[0.03]">
+      <h3 className="text-lg font-semibold mb-4">{title}</h3>
+      {children}
+    </div>
+  );
+};
+
+export default MyComponent;
+```
+
+**Step 2**: Use in pages/components
+```typescript
+import MyComponent from "../components/ui/mycomponent/MyComponent";
+
+<MyComponent title="My Title">
+  Content here
+</MyComponent>
+```
+
+### Adding a New API Endpoint
+
+**Step 1**: Create API service file (if doesn't exist)
+```typescript
+// src/services/api.ts
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+
+export async function fetchUsers() {
+  const response = await fetch(`${API_BASE_URL}/users`);
+  if (!response.ok) throw new Error('Failed to fetch users');
+  return response.json();
+}
+```
+
+**Step 2**: Use in component
+```typescript
+import { useEffect, useState } from "react";
+import { fetchUsers } from "../services/api";
+
+const [users, setUsers] = useState([]);
+useEffect(() => {
+  fetchUsers().then(setUsers).catch(console.error);
+}, []);
+```
+
+### Creating a New Form
+
+**Step 1**: Use form components from `src/components/form/`
+```typescript
+import InputField from "../components/form/input/InputField";
+import { useState } from "react";
+
+const [formData, setFormData] = useState({ name: "", email: "" });
+
+const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  setFormData({ ...formData, [e.target.name]: e.target.value });
+};
+
+<InputField
+  name="name"
+  value={formData.name}
+  onChange={handleChange}
+  placeholder="Enter name"
+/>
+```
+
+### Adding a New Chart/Visualization
+
+**Step 1**: Create chart component
+```typescript
+// src/components/charts/pie/PieChartOne.tsx
+import Chart from "react-apexcharts";
+import { ApexOptions } from "apexcharts";
+
+export default function PieChartOne() {
+  const options: ApexOptions = {
+    chart: { type: "pie" },
+    labels: ["A", "B", "C"],
+  };
+  const series = [44, 55, 13];
+  
+  return (
+    <div className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-white/[0.03]">
+      <Chart options={options} series={series} type="pie" height={350} />
+    </div>
+  );
+}
+```
+
+**Step 2**: Use in page
+```typescript
+import PieChartOne from "../components/charts/pie/PieChartOne";
+
+<PieChartOne />
+```
+
+### Modifying Theme/Styling
+
+**Step 1**: Edit `src/index.css`
+```css
+/* Change brand color */
+--color-brand-500: #7a5af8; /* Change from #465fff */
+```
+
+**Step 2**: Rebuild (Vite auto-reloads)
+
+**Step 3**: Use in components
+```typescript
+<div className="bg-brand-500">Uses new brand color</div>
+```
+
+---
+
+## Section L: Critical Rules (Don'ts)
+
+### What Files Should Never Be Modified
+❌ **`vite.config.ts`** - Only modify if adding new plugins
+❌ **`tsconfig.json`** - Only modify if changing TypeScript settings
+❌ **`postcss.config.js`** - Only modify if changing PostCSS config
+❌ **`package.json`** - Only modify when adding/removing dependencies
+❌ **`index.css` theme variables** - Only modify for theme changes, not for component-specific styles
+
+### What Patterns to Avoid
+❌ **Don't create separate CSS files** for components (use Tailwind)
+❌ **Don't use class components** (use functional components)
+❌ **Don't use PropTypes** (use TypeScript interfaces)
+❌ **Don't import from "react-router-dom"** (use "react-router")
+❌ **Don't forget dark mode variants** in styles
+❌ **Don't use inline styles** (use Tailwind classes)
+❌ **Don't create global state** without Context (use existing contexts or create new one)
+
+### Security Considerations
+✅ **Never commit API keys** or secrets to code
+✅ **Use environment variables** for sensitive data
+✅ **Validate user input** in forms
+✅ **Sanitize data** before rendering (if from external sources)
+
+### Performance Considerations
+✅ **Use `React.memo`** for expensive components (if needed)
+✅ **Lazy load routes** with `React.lazy` (if app grows large)
+✅ **Optimize images** in `public/images/`
+✅ **Use `useCallback`** for functions passed as props (if needed)
+✅ **Use `useMemo`** for expensive calculations (if needed)
+
+---
+
+## Section M: Important File References
+
+### Main App Entry Point
+**File**: `src/main.tsx`
+- Renders app with providers (ThemeProvider, AppWrapper)
+- Entry point for React app
+
+### Router Configuration File
+**File**: `src/App.tsx`
+- All routes defined here
+- Layout structure (AppLayout wraps dashboard routes)
+
+### Theme/Style Configuration
+**File**: `src/index.css`
+- Tailwind configuration
+- Custom theme variables
+- Custom utilities
+- Global styles
+
+### API Configuration
+⚠️ **Not implemented yet**
+✅ **When adding**: Create `src/services/api.ts`
+
+### State Store Configuration
+**Files**:
+- `src/context/ThemeContext.tsx` - Theme state
+- `src/context/SidebarContext.tsx` - Sidebar state
+
+### Environment Variables File
+⚠️ **Not created yet**
+✅ **When needed**: Create `.env` file in root
+✅ **Variables must start with `VITE_`**
+
+---
+
+## Section N: Examples
+
+### Typical Component Structure
+
+```typescript
+// src/components/ui/example/Example.tsx
+import { ReactNode } from "react";
+import { Link } from "react-router";
+import { useTheme } from "../../context/ThemeContext";
+import { PlusIcon } from "../../icons";
+
+interface ExampleProps {
+  title: string;
+  description?: string;
+  children?: ReactNode;
+  onAction?: () => void;
+}
+
+const Example: React.FC<ExampleProps> = ({
+  title,
+  description,
+  children,
+  onAction,
+}) => {
+  const { theme } = useTheme();
+  
+  return (
+    <div className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-white/[0.03]">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">
+          {title}
+        </h3>
+        {onAction && (
+          <button
+            onClick={onAction}
+            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-brand-500 rounded-lg hover:bg-brand-600"
+          >
+            <PlusIcon />
+            Action
+          </button>
+        )}
+      </div>
+      {description && (
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+          {description}
+        </p>
+      )}
+      {children}
+    </div>
+  );
+};
+
+export default Example;
+```
+
+### API Call Example (Future)
+
+```typescript
+// src/services/api.ts
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+
+export async function fetchUsers() {
+  const response = await fetch(`${API_BASE_URL}/users`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch users');
+  }
+  return response.json();
+}
+
+// Usage in component
+import { useEffect, useState } from "react";
+import { fetchUsers } from "../services/api";
+
+const [users, setUsers] = useState([]);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState<string | null>(null);
+
+useEffect(() => {
+  async function loadUsers() {
+    try {
+      setLoading(true);
+      const data = await fetchUsers();
+      setUsers(data);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
+    } finally {
+      setLoading(false);
+    }
+  }
+  loadUsers();
+}, []);
+
+if (loading) return <div>Loading...</div>;
+if (error) return <div>Error: {error}</div>;
+return <div>{users.map(user => <div key={user.id}>{user.name}</div>)}</div>;
+```
+
+### Routing Example
+
+```typescript
+// src/App.tsx
+import { BrowserRouter as Router, Routes, Route } from "react-router";
+import AppLayout from "./layout/AppLayout";
+import Home from "./pages/Dashboard/Home";
+import MyNewPage from "./pages/MyNewPage";
+import SignIn from "./pages/AuthPages/SignIn";
+import NotFound from "./pages/OtherPage/NotFound";
+
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        {/* Dashboard Layout - has sidebar and header */}
+        <Route element={<AppLayout />}>
+          <Route index path="/" element={<Home />} />
+          <Route path="/my-new-page" element={<MyNewPage />} />
+        </Route>
+        
+        {/* Auth Layout - no sidebar */}
+        <Route path="/signin" element={<SignIn />} />
+        
+        {/* Fallback */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
+  );
+}
+```
+
+### Styled Component Example
+
+```typescript
+// Using Tailwind classes (actual pattern from codebase)
+const Button: React.FC<ButtonProps> = ({ variant = "primary", children }) => {
+  const variantClasses = {
+    primary: "bg-brand-500 text-white hover:bg-brand-600",
+    outline: "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-700",
+  };
+  
+  return (
+    <button className={`px-5 py-3.5 rounded-lg transition ${variantClasses[variant]}`}>
+      {children}
+    </button>
+  );
+};
+```
+
+---
+
+## Summary of Key Patterns
+
+### ✅ DO
+- Use functional components with TypeScript
+- Use React.FC type annotation
+- Define props interfaces above component
+- Use default exports for components
+- Use Tailwind utility classes
+- Include dark mode variants
+- Use React Context for global state
+- Use `useState` for local state
+- Import from "react-router" (not "react-router-dom")
+- Use PascalCase for component files
+- Use camelCase for variables
+- Always include PageMeta in pages
+- Use relative imports (`../`, `../../`)
+
+### ❌ DON'T
+- Create separate CSS files for components
+- Use class components
+- Use PropTypes (use TypeScript)
+- Import from "react-router-dom"
+- Forget dark mode variants
+- Use inline styles
+- Create global state without Context
+- Modify config files unnecessarily
+
+---
+
+**Last Updated**: Based on codebase analysis of TailAdmin React v2.0.2
+**Project Path**: `D:\free-react-tailwind-admin-dashboard-main\free-react-tailwind-admin-dashboard-main`
+

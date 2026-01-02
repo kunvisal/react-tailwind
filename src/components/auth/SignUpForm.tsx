@@ -1,13 +1,57 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { ChevronLeftIcon, EyeCloseIcon, EyeIcon } from "../../icons";
 import Label from "../form/Label";
 import Input from "../form/input/InputField";
-import Checkbox from "../form/input/Checkbox";
+import { useAuth } from "../../context/AuthContext";
+import {
+  registerSchema,
+  RegisterFormData,
+  getPasswordStrength,
+} from "../../utils/validation/schemas";
 
 export default function SignUpForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const { register: registerUser, isLoading, error, clearError } = useAuth();
+  const navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<RegisterFormData>({
+    resolver: zodResolver(registerSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+      confirmPassword: "",
+      firstName: "",
+      lastName: "",
+      phoneNumber: "",
+    },
+  });
+
+  const password = watch("password");
+  const passwordStrength = password ? getPasswordStrength(password) : null;
+
+  const onSubmit = async (data: RegisterFormData) => {
+    try {
+      clearError();
+      await registerUser(data);
+      // Redirect to signin page with success message
+      navigate("/signin", {
+        state: { message: "Registration successful! Please sign in." },
+      });
+    } catch (err) {
+      // Error is handled by AuthContext
+      console.error("Registration error:", err);
+    }
+  };
+
   return (
     <div className="flex flex-col flex-1 w-full overflow-y-auto lg:w-1/2 no-scrollbar">
       <div className="w-full max-w-md mx-auto mb-5 sm:pt-10">
@@ -26,7 +70,7 @@ export default function SignUpForm() {
               Sign Up
             </h1>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              Enter your email and password to sign up!
+              Enter your details to create an account!
             </p>
           </div>
           <div>
@@ -82,47 +126,81 @@ export default function SignUpForm() {
                 </span>
               </div>
             </div>
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              {error && (
+                <div className="mb-4 p-3 rounded-lg bg-error-50 dark:bg-error-500/10 border border-error-200 dark:border-error-500/20">
+                  <p className="text-sm text-error-600 dark:text-error-400">
+                    {error}
+                  </p>
+                </div>
+              )}
               <div className="space-y-5">
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-                  {/* <!-- First Name --> */}
                   <div className="sm:col-span-1">
                     <Label>
                       First Name<span className="text-error-500">*</span>
                     </Label>
                     <Input
                       type="text"
-                      id="fname"
-                      name="fname"
                       placeholder="Enter your first name"
+                      {...register("firstName")}
+                      error={errors.firstName?.message}
                     />
+                    {errors.firstName && (
+                      <p className="mt-1 text-sm text-error-500">
+                        {errors.firstName.message}
+                      </p>
+                    )}
                   </div>
-                  {/* <!-- Last Name --> */}
                   <div className="sm:col-span-1">
                     <Label>
                       Last Name<span className="text-error-500">*</span>
                     </Label>
                     <Input
                       type="text"
-                      id="lname"
-                      name="lname"
                       placeholder="Enter your last name"
+                      {...register("lastName")}
+                      error={errors.lastName?.message}
                     />
+                    {errors.lastName && (
+                      <p className="mt-1 text-sm text-error-500">
+                        {errors.lastName.message}
+                      </p>
+                    )}
                   </div>
                 </div>
-                {/* <!-- Email --> */}
                 <div>
                   <Label>
                     Email<span className="text-error-500">*</span>
                   </Label>
                   <Input
                     type="email"
-                    id="email"
-                    name="email"
                     placeholder="Enter your email"
+                    {...register("email")}
+                    error={errors.email?.message}
                   />
+                  {errors.email && (
+                    <p className="mt-1 text-sm text-error-500">
+                      {errors.email.message}
+                    </p>
+                  )}
                 </div>
-                {/* <!-- Password --> */}
+                <div>
+                  <Label>
+                    Phone Number <span className="text-gray-400">(Optional)</span>
+                  </Label>
+                  <Input
+                    type="tel"
+                    placeholder="+855123456789"
+                    {...register("phoneNumber")}
+                    error={errors.phoneNumber?.message}
+                  />
+                  {errors.phoneNumber && (
+                    <p className="mt-1 text-sm text-error-500">
+                      {errors.phoneNumber.message}
+                    </p>
+                  )}
+                </div>
                 <div>
                   <Label>
                     Password<span className="text-error-500">*</span>
@@ -131,6 +209,8 @@ export default function SignUpForm() {
                     <Input
                       placeholder="Enter your password"
                       type={showPassword ? "text" : "password"}
+                      {...register("password")}
+                      error={errors.password?.message}
                     />
                     <span
                       onClick={() => setShowPassword(!showPassword)}
@@ -143,15 +223,68 @@ export default function SignUpForm() {
                       )}
                     </span>
                   </div>
+                  {passwordStrength && (
+                    <div className="mt-2">
+                      <div className="flex items-center gap-2">
+                        <div className="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                          <div
+                            className={`h-full bg-${passwordStrength.color} transition-all`}
+                            style={{
+                              width: `${(passwordStrength.score / 6) * 100}%`,
+                            }}
+                          ></div>
+                        </div>
+                        <span
+                          className={`text-xs font-medium text-${passwordStrength.color}`}
+                        >
+                          {passwordStrength.label}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                  {errors.password && (
+                    <p className="mt-1 text-sm text-error-500">
+                      {errors.password.message}
+                    </p>
+                  )}
                 </div>
-                {/* <!-- Checkbox --> */}
-                <div className="flex items-center gap-3">
-                  <Checkbox
-                    className="w-5 h-5"
-                    checked={isChecked}
-                    onChange={setIsChecked}
+                <div>
+                  <Label>
+                    Confirm Password<span className="text-error-500">*</span>
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      placeholder="Confirm your password"
+                      type={showConfirmPassword ? "text" : "password"}
+                      {...register("confirmPassword")}
+                      error={errors.confirmPassword?.message}
+                    />
+                    <span
+                      onClick={() =>
+                        setShowConfirmPassword(!showConfirmPassword)
+                      }
+                      className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2"
+                    >
+                      {showConfirmPassword ? (
+                        <EyeIcon className="fill-gray-500 dark:fill-gray-400 size-5" />
+                      ) : (
+                        <EyeCloseIcon className="fill-gray-500 dark:fill-gray-400 size-5" />
+                      )}
+                    </span>
+                  </div>
+                  {errors.confirmPassword && (
+                    <p className="mt-1 text-sm text-error-500">
+                      {errors.confirmPassword.message}
+                    </p>
+                  )}
+                </div>
+                <div className="flex items-start gap-3">
+                  <input
+                    type="checkbox"
+                    className="w-4 h-4 mt-1 text-brand-500 border-gray-300 rounded focus:ring-brand-500"
+                    required
                   />
-                  <p className="inline-block font-normal text-gray-500 dark:text-gray-400">
+                  <p className="inline-block text-sm font-normal text-gray-500 dark:text-gray-400">
                     By creating an account means you agree to the{" "}
                     <span className="text-gray-800 dark:text-white/90">
                       Terms and Conditions,
@@ -162,10 +295,13 @@ export default function SignUpForm() {
                     </span>
                   </p>
                 </div>
-                {/* <!-- Button --> */}
                 <div>
-                  <button className="flex items-center justify-center w-full px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600">
-                    Sign Up
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="flex items-center justify-center w-full px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isLoading ? "Creating account..." : "Sign Up"}
                   </button>
                 </div>
               </div>

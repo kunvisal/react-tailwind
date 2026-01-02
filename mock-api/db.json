@@ -1,0 +1,775 @@
+{
+  "login": {
+    "success": true,
+    "data": {
+      "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0RDdFNUI0MS04RjJDLTRBOUItOUUxRC0zQzVGN0E5QjFEMkUiLCJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwiaWF0IjoxNzA0MDY3MjAwLCJleHAiOjE3MDQxNTM2MDAsImp0aSI6IjU1MGU4NDAwLWUyOWItNDFkNC1hNzE2LTQ0NjY1NTQ0MDAwMCIsInVzZXJJZCI6IjREN0U1QjQxLThGMkMtNEE5Qi05RTFELTNDNUY3QTlCMUQyRSIsImZpcnN0TmFtZSI6IlNvayIsImxhc3ROYW1lIjoiQ2hhbiIsInJvbGVzIjpbIkFkbWluIl0sInBlcm1pc3Npb25zIjpbIlVzZXJzLkNyZWF0ZSIsIlVzZXJzLlJlYWQiLCJVc2Vycy5VcGRhdGUiLCJVc2Vycy5EZWxldGUiLCJSZWdpb25zLkNyZWF0ZSIsIlJlZ2lvbnMuUmVhZCIsIlJlZ2lvbnMuVXBkYXRlIiwiUmVnaW9ucy5EZWxldGUiLCJCcmFuY2hlcy5DcmVhdGUiLCJCcmFuY2hlcy5SZWFkIiwiQnJhbmNoZXMuVXBkYXRlIiwiQnJhbmNoZXMuRGVsZXRlIl0sInJlZ2lvbnMiOlt7InJlZ2lvbklkIjoiQkIxLVJFR0lPTi0wMDEiLCJyZWdpb25Db2RlIjoiQkIxL0tIMDAxMDAwMi9CQVRUQU1CQU5HIFJPIiwicmVnaW9uTmFtZSI6IkJhdHRhbWJhbmcgUmVnaW9uIiwiYnJhbmNoZXMiOlt7ImJyYW5jaElkIjoiWVRQLUJSQU5DSC0wMDEiLCJicmFuY2hDb2RlIjoiWVRQL0tIMDAxMDIyMC9CQi1USE1BIFBVT0siLCJicmFuY2hOYW1lIjoiVGhtYSBQdW9rIEJyYW5jaCJ9LHsiYnJhbmNoSWQiOiJCVEstQlJBTkNILTAwMSIsImJyYW5jaENvZGUiOiJCVEsvS0gwMDEwMjE3L0JCLVRITUFLS09VTCIsImJyYW5jaE5hbWUiOiJUaG1hIEtvdWwgQnJhbmNoIn1dfV0sInNlc3Npb25JZCI6IlNFU1NJT04tMDAxIiwidG9rZW5WZXJzaW9uIjoxLCJpcEFkZHJlc3MiOiIxOTIuMTY4LjEuMTAwIn0.dummySignature",
+      "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.refreshTokenPayload.dummySignature",
+      "expiresIn": 3600,
+      "user": {
+        "id": "4D7E5B41-8F2C-4A9B-9E1D-3C5F7A9B1D2E",
+        "email": "admin@example.com",
+        "firstName": "Sok",
+        "lastName": "Chan",
+        "phoneNumber": "+855123456789",
+        "isActive": true,
+        "isEmailVerified": true,
+        "roles": [
+          {
+            "id": "ROLE-001",
+            "name": "Admin",
+            "description": "System Administrator"
+          }
+        ],
+        "permissions": ["Users.Create", "Users.Read", "Users.Update", "Users.Delete", "Regions.Create", "Regions.Read", "Regions.Update", "Regions.Delete", "Branches.Create", "Branches.Read", "Branches.Update", "Branches.Delete", "Menus.Create", "Menus.Read", "Menus.Update", "Menus.Delete"],
+        "regions": [
+          {
+            "regionId": "BB1-REGION-001",
+            "regionCode": "BB1/KH0010002/BATTAMBANG RO",
+            "regionName": "Battambang Region",
+            "branches": [
+              {
+                "branchId": "YTP-BRANCH-001",
+                "branchCode": "YTP/KH0010220/BB-THMA PUOK",
+                "branchName": "Thma Puok Branch"
+              },
+              {
+                "branchId": "BTK-BRANCH-001",
+                "branchCode": "BTK/KH0010217/BB-THMA KOUL",
+                "branchName": "Thma Koul Branch"
+              }
+            ]
+          }
+        ],
+        "lastLoginAt": "2025-01-02T10:30:00Z",
+        "createdAt": "2024-01-01T08:00:00Z",
+        "updatedAt": "2025-01-02T10:30:00Z"
+      }
+    },
+    "message": "Login successful"
+  },
+  "users": [
+    {
+      "id": "4D7E5B41-8F2C-4A9B-9E1D-3C5F7A9B1D2E",
+      "email": "admin@example.com",
+      "firstName": "Sok",
+      "lastName": "Chan",
+      "phoneNumber": "+855123456789",
+      "isActive": true,
+      "isEmailVerified": true,
+      "roles": [
+        {
+          "id": "ROLE-001",
+          "name": "Admin",
+          "description": "System Administrator"
+        }
+      ],
+      "lastLoginAt": "2025-01-02T10:30:00Z",
+      "createdAt": "2024-01-01T08:00:00Z",
+      "updatedAt": "2025-01-02T10:30:00Z",
+      "createdBy": {
+        "id": "SYSTEM",
+        "name": "System"
+      }
+    },
+    {
+      "id": "5E8F6C52-9G3D-5B0C-0F2E-4D6G8B0C2E3F",
+      "email": "manager@example.com",
+      "firstName": "Dara",
+      "lastName": "Sok",
+      "phoneNumber": "+855987654321",
+      "isActive": true,
+      "isEmailVerified": true,
+      "roles": [
+        {
+          "id": "ROLE-002",
+          "name": "RegionalManager",
+          "description": "Regional Manager"
+        }
+      ],
+      "lastLoginAt": "2025-01-02T09:15:00Z",
+      "createdAt": "2024-01-15T08:00:00Z",
+      "updatedAt": "2025-01-02T09:15:00Z",
+      "createdBy": {
+        "id": "4D7E5B41-8F2C-4A9B-9E1D-3C5F7A9B1D2E",
+        "name": "Sok Chan"
+      }
+    },
+    {
+      "id": "6F9G7D63-0H4E-6C1D-1G3F-5E7H9C1D3F4G",
+      "email": "branch.manager@example.com",
+      "firstName": "Sophea",
+      "lastName": "Chea",
+      "phoneNumber": "+855111222333",
+      "isActive": true,
+      "isEmailVerified": true,
+      "roles": [
+        {
+          "id": "ROLE-003",
+          "name": "BranchManager",
+          "description": "Branch Manager"
+        }
+      ],
+      "lastLoginAt": "2025-01-02T08:45:00Z",
+      "createdAt": "2024-02-01T08:00:00Z",
+      "updatedAt": "2025-01-02T08:45:00Z",
+      "createdBy": {
+        "id": "4D7E5B41-8F2C-4A9B-9E1D-3C5F7A9B1D2E",
+        "name": "Sok Chan"
+      }
+    },
+    {
+      "id": "7G0H8E74-1I5F-7D2E-2H4G-6F8I0D2E4G5H",
+      "email": "staff@example.com",
+      "firstName": "Bopha",
+      "lastName": "Lim",
+      "phoneNumber": "+855444555666",
+      "isActive": true,
+      "isEmailVerified": true,
+      "roles": [
+        {
+          "id": "ROLE-004",
+          "name": "Staff",
+          "description": "Staff Member"
+        }
+      ],
+      "lastLoginAt": "2025-01-02T07:30:00Z",
+      "createdAt": "2024-03-01T08:00:00Z",
+      "updatedAt": "2025-01-02T07:30:00Z",
+      "createdBy": {
+        "id": "6F9G7D63-0H4E-6C1D-1G3F-5E7H9C1D3F4G",
+        "name": "Sophea Chea"
+      }
+    },
+    {
+      "id": "8H1I9F85-2J6G-8E3F-3I5H-7G9J1E3F5H6I",
+      "email": "user@example.com",
+      "firstName": "Visal",
+      "lastName": "Kun",
+      "phoneNumber": "+855777888999",
+      "isActive": true,
+      "isEmailVerified": false,
+      "roles": [
+        {
+          "id": "ROLE-005",
+          "name": "User",
+          "description": "Regular User"
+        }
+      ],
+      "lastLoginAt": "2025-01-01T16:20:00Z",
+      "createdAt": "2024-04-01T08:00:00Z",
+      "updatedAt": "2025-01-01T16:20:00Z",
+      "createdBy": {
+        "id": "4D7E5B41-8F2C-4A9B-9E1D-3C5F7A9B1D2E",
+        "name": "Sok Chan"
+      }
+    }
+  ],
+  "roles": [
+    {
+      "id": "ROLE-001",
+      "name": "Admin",
+      "description": "System Administrator with full access",
+      "isSystemRole": true,
+      "createdAt": "2024-01-01T08:00:00Z",
+      "updatedAt": "2024-01-01T08:00:00Z"
+    },
+    {
+      "id": "ROLE-002",
+      "name": "RegionalManager",
+      "description": "Regional Manager with access to region and branches",
+      "isSystemRole": false,
+      "createdAt": "2024-01-01T08:00:00Z",
+      "updatedAt": "2024-01-01T08:00:00Z"
+    },
+    {
+      "id": "ROLE-003",
+      "name": "BranchManager",
+      "description": "Branch Manager with access to specific branch",
+      "isSystemRole": false,
+      "createdAt": "2024-01-01T08:00:00Z",
+      "updatedAt": "2024-01-01T08:00:00Z"
+    },
+    {
+      "id": "ROLE-004",
+      "name": "Staff",
+      "description": "Staff member with limited access",
+      "isSystemRole": false,
+      "createdAt": "2024-01-01T08:00:00Z",
+      "updatedAt": "2024-01-01T08:00:00Z"
+    },
+    {
+      "id": "ROLE-005",
+      "name": "User",
+      "description": "Regular user with basic access",
+      "isSystemRole": false,
+      "createdAt": "2024-01-01T08:00:00Z",
+      "updatedAt": "2024-01-01T08:00:00Z"
+    }
+  ],
+  "permissions": [
+    {
+      "id": "PERM-001",
+      "name": "Users.Create",
+      "description": "Create new users",
+      "resource": "Users",
+      "action": "Create",
+      "createdAt": "2024-01-01T08:00:00Z"
+    },
+    {
+      "id": "PERM-002",
+      "name": "Users.Read",
+      "description": "View users",
+      "resource": "Users",
+      "action": "Read",
+      "createdAt": "2024-01-01T08:00:00Z"
+    },
+    {
+      "id": "PERM-003",
+      "name": "Users.Update",
+      "description": "Update users",
+      "resource": "Users",
+      "action": "Update",
+      "createdAt": "2024-01-01T08:00:00Z"
+    },
+    {
+      "id": "PERM-004",
+      "name": "Users.Delete",
+      "description": "Delete users",
+      "resource": "Users",
+      "action": "Delete",
+      "createdAt": "2024-01-01T08:00:00Z"
+    },
+    {
+      "id": "PERM-005",
+      "name": "Regions.Create",
+      "description": "Create new regions",
+      "resource": "Regions",
+      "action": "Create",
+      "createdAt": "2024-01-01T08:00:00Z"
+    },
+    {
+      "id": "PERM-006",
+      "name": "Regions.Read",
+      "description": "View regions",
+      "resource": "Regions",
+      "action": "Read",
+      "createdAt": "2024-01-01T08:00:00Z"
+    },
+    {
+      "id": "PERM-007",
+      "name": "Regions.Update",
+      "description": "Update regions",
+      "resource": "Regions",
+      "action": "Update",
+      "createdAt": "2024-01-01T08:00:00Z"
+    },
+    {
+      "id": "PERM-008",
+      "name": "Regions.Delete",
+      "description": "Delete regions",
+      "resource": "Regions",
+      "action": "Delete",
+      "createdAt": "2024-01-01T08:00:00Z"
+    },
+    {
+      "id": "PERM-009",
+      "name": "Branches.Create",
+      "description": "Create new branches",
+      "resource": "Branches",
+      "action": "Create",
+      "createdAt": "2024-01-01T08:00:00Z"
+    },
+    {
+      "id": "PERM-010",
+      "name": "Branches.Read",
+      "description": "View branches",
+      "resource": "Branches",
+      "action": "Read",
+      "createdAt": "2024-01-01T08:00:00Z"
+    },
+    {
+      "id": "PERM-011",
+      "name": "Branches.Update",
+      "description": "Update branches",
+      "resource": "Branches",
+      "action": "Update",
+      "createdAt": "2024-01-01T08:00:00Z"
+    },
+    {
+      "id": "PERM-012",
+      "name": "Branches.Delete",
+      "description": "Delete branches",
+      "resource": "Branches",
+      "action": "Delete",
+      "createdAt": "2024-01-01T08:00:00Z"
+    },
+    {
+      "id": "PERM-013",
+      "name": "Menus.Create",
+      "description": "Create menu items",
+      "resource": "Menus",
+      "action": "Create",
+      "createdAt": "2024-01-01T08:00:00Z"
+    },
+    {
+      "id": "PERM-014",
+      "name": "Menus.Read",
+      "description": "View menu items",
+      "resource": "Menus",
+      "action": "Read",
+      "createdAt": "2024-01-01T08:00:00Z"
+    },
+    {
+      "id": "PERM-015",
+      "name": "Menus.Update",
+      "description": "Update menu items",
+      "resource": "Menus",
+      "action": "Update",
+      "createdAt": "2024-01-01T08:00:00Z"
+    },
+    {
+      "id": "PERM-016",
+      "name": "Menus.Delete",
+      "description": "Delete menu items",
+      "resource": "Menus",
+      "action": "Delete",
+      "createdAt": "2024-01-01T08:00:00Z"
+    }
+  ],
+  "regions": [
+    {
+      "id": "BB1-REGION-001",
+      "code": "BB1/KH0010002/BATTAMBANG RO",
+      "name": "Battambang Region",
+      "description": "Battambang Regional Office",
+      "isActive": true,
+      "branchCount": 5,
+      "createdAt": "2024-01-01T08:00:00Z",
+      "updatedAt": "2024-01-01T08:00:00Z",
+      "createdBy": {
+        "id": "4D7E5B41-8F2C-4A9B-9E1D-3C5F7A9B1D2E",
+        "name": "Sok Chan"
+      }
+    },
+    {
+      "id": "PP1-REGION-001",
+      "code": "PP1/KH0010001/PHNOM PENH RO",
+      "name": "Phnom Penh Region",
+      "description": "Phnom Penh Regional Office",
+      "isActive": true,
+      "branchCount": 8,
+      "createdAt": "2024-01-01T08:00:00Z",
+      "updatedAt": "2024-01-01T08:00:00Z",
+      "createdBy": {
+        "id": "4D7E5B41-8F2C-4A9B-9E1D-3C5F7A9B1D2E",
+        "name": "Sok Chan"
+      }
+    },
+    {
+      "id": "SR1-REGION-001",
+      "code": "SR1/KH0010003/SIEM REAP RO",
+      "name": "Siem Reap Region",
+      "description": "Siem Reap Regional Office",
+      "isActive": true,
+      "branchCount": 4,
+      "createdAt": "2024-01-01T08:00:00Z",
+      "updatedAt": "2024-01-01T08:00:00Z",
+      "createdBy": {
+        "id": "4D7E5B41-8F2C-4A9B-9E1D-3C5F7A9B1D2E",
+        "name": "Sok Chan"
+      }
+    }
+  ],
+  "branches": [
+    {
+      "id": "YTP-BRANCH-001",
+      "regionId": "BB1-REGION-001",
+      "regionCode": "BB1/KH0010002/BATTAMBANG RO",
+      "code": "YTP/KH0010220/BB-THMA PUOK",
+      "name": "Thma Puok Branch",
+      "description": "Thma Puok Branch Office",
+      "address": "Thma Puok District, Battambang Province",
+      "phoneNumber": "+855123456789",
+      "isActive": true,
+      "createdAt": "2024-01-01T08:00:00Z",
+      "updatedAt": "2024-01-01T08:00:00Z"
+    },
+    {
+      "id": "BTK-BRANCH-001",
+      "regionId": "BB1-REGION-001",
+      "regionCode": "BB1/KH0010002/BATTAMBANG RO",
+      "code": "BTK/KH0010217/BB-THMA KOUL",
+      "name": "Thma Koul Branch",
+      "description": "Thma Koul Branch Office",
+      "address": "Thma Koul District, Battambang Province",
+      "phoneNumber": "+855123456790",
+      "isActive": true,
+      "createdAt": "2024-01-01T08:00:00Z",
+      "updatedAt": "2024-01-01T08:00:00Z"
+    },
+    {
+      "id": "BVL-BRANCH-001",
+      "regionId": "BB1-REGION-001",
+      "regionCode": "BB1/KH0010002/BATTAMBANG RO",
+      "code": "BVL/KH0010218/BB-BAVEL",
+      "name": "Bavel Branch",
+      "description": "Bavel Branch Office",
+      "address": "Bavel District, Battambang Province",
+      "phoneNumber": "+855123456791",
+      "isActive": true,
+      "createdAt": "2024-01-01T08:00:00Z",
+      "updatedAt": "2024-01-01T08:00:00Z"
+    },
+    {
+      "id": "PP-CENTRAL-001",
+      "regionId": "PP1-REGION-001",
+      "regionCode": "PP1/KH0010001/PHNOM PENH RO",
+      "code": "PPC/KH0010101/PP-CENTRAL",
+      "name": "Phnom Penh Central Branch",
+      "description": "Central Branch in Phnom Penh",
+      "address": "Central District, Phnom Penh",
+      "phoneNumber": "+855123456792",
+      "isActive": true,
+      "createdAt": "2024-01-01T08:00:00Z",
+      "updatedAt": "2024-01-01T08:00:00Z"
+    },
+    {
+      "id": "PP-TUOL-001",
+      "regionId": "PP1-REGION-001",
+      "regionCode": "PP1/KH0010001/PHNOM PENH RO",
+      "code": "PPT/KH0010102/PP-TUOL KORK",
+      "name": "Tuol Kork Branch",
+      "description": "Tuol Kork Branch Office",
+      "address": "Tuol Kork District, Phnom Penh",
+      "phoneNumber": "+855123456793",
+      "isActive": true,
+      "createdAt": "2024-01-01T08:00:00Z",
+      "updatedAt": "2024-01-01T08:00:00Z"
+    },
+    {
+      "id": "SR-CENTRAL-001",
+      "regionId": "SR1-REGION-001",
+      "regionCode": "SR1/KH0010003/SIEM REAP RO",
+      "code": "SRC/KH0010301/SR-CENTRAL",
+      "name": "Siem Reap Central Branch",
+      "description": "Central Branch in Siem Reap",
+      "address": "Central District, Siem Reap",
+      "phoneNumber": "+855123456794",
+      "isActive": true,
+      "createdAt": "2024-01-01T08:00:00Z",
+      "updatedAt": "2024-01-01T08:00:00Z"
+    }
+  ],
+  "menuItems": [
+    {
+      "id": "MENU-001",
+      "parentId": null,
+      "name": "Dashboard",
+      "displayName": "Dashboard",
+      "icon": "GridIcon",
+      "path": "/",
+      "orderIndex": 1,
+      "isVisible": true,
+      "requiredPermission": null,
+      "componentName": "Dashboard",
+      "children": []
+    },
+    {
+      "id": "MENU-002",
+      "parentId": null,
+      "name": "ApplicationData",
+      "displayName": "Application Data",
+      "icon": "BoxIcon",
+      "path": null,
+      "orderIndex": 2,
+      "isVisible": true,
+      "requiredPermission": null,
+      "componentName": null,
+      "children": [
+        {
+          "id": "MENU-003",
+          "parentId": "MENU-002",
+          "name": "CustomerManagement",
+          "displayName": "Customer Management",
+          "icon": "UserIcon",
+          "path": "/customers",
+          "orderIndex": 1,
+          "isVisible": true,
+          "requiredPermission": "Customers.Read",
+          "componentName": "CustomerManagement",
+          "children": []
+        },
+        {
+          "id": "MENU-004",
+          "parentId": "MENU-002",
+          "name": "AccountSetup",
+          "displayName": "Account Setup",
+          "icon": "SettingsIcon",
+          "path": "/accounts",
+          "orderIndex": 2,
+          "isVisible": true,
+          "requiredPermission": "Accounts.Read",
+          "componentName": "AccountSetup",
+          "children": []
+        },
+        {
+          "id": "MENU-005",
+          "parentId": "MENU-002",
+          "name": "SystemConfiguration",
+          "displayName": "System Configuration",
+          "icon": "CogIcon",
+          "path": "/config",
+          "orderIndex": 3,
+          "isVisible": true,
+          "requiredPermission": "System.Configure",
+          "componentName": "SystemConfiguration",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "MENU-006",
+      "parentId": null,
+      "name": "PrintingTools",
+      "displayName": "Printing Tools",
+      "icon": "PrinterIcon",
+      "path": null,
+      "orderIndex": 3,
+      "isVisible": true,
+      "requiredPermission": null,
+      "componentName": null,
+      "children": [
+        {
+          "id": "MENU-007",
+          "parentId": "MENU-006",
+          "name": "CustomerReports",
+          "displayName": "Customer Reports",
+          "icon": "FileIcon",
+          "path": "/reports/customers",
+          "orderIndex": 1,
+          "isVisible": true,
+          "requiredPermission": "Reports.Customers.Read",
+          "componentName": "CustomerReports",
+          "children": []
+        },
+        {
+          "id": "MENU-008",
+          "parentId": "MENU-006",
+          "name": "TransactionReports",
+          "displayName": "Transaction Reports",
+          "icon": "DocumentIcon",
+          "path": "/reports/transactions",
+          "orderIndex": 2,
+          "isVisible": true,
+          "requiredPermission": "Reports.Transactions.Read",
+          "componentName": "TransactionReports",
+          "children": []
+        },
+        {
+          "id": "MENU-009",
+          "parentId": "MENU-006",
+          "name": "SystemLogs",
+          "displayName": "System Logs",
+          "icon": "ClipboardIcon",
+          "path": "/reports/logs",
+          "orderIndex": 3,
+          "isVisible": true,
+          "requiredPermission": "Reports.Logs.Read",
+          "componentName": "SystemLogs",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "MENU-010",
+      "parentId": null,
+      "name": "Administration",
+      "displayName": "Administration",
+      "icon": "ShieldIcon",
+      "path": null,
+      "orderIndex": 4,
+      "isVisible": true,
+      "requiredPermission": "Admin.Access",
+      "componentName": null,
+      "children": [
+        {
+          "id": "MENU-011",
+          "parentId": "MENU-010",
+          "name": "UserManagement",
+          "displayName": "User Management",
+          "icon": "UsersIcon",
+          "path": "/admin/users",
+          "orderIndex": 1,
+          "isVisible": true,
+          "requiredPermission": "Users.Read",
+          "componentName": "UserManagement",
+          "children": []
+        },
+        {
+          "id": "MENU-012",
+          "parentId": "MENU-010",
+          "name": "RegionManagement",
+          "displayName": "Region Management",
+          "icon": "MapIcon",
+          "path": "/admin/regions",
+          "orderIndex": 2,
+          "isVisible": true,
+          "requiredPermission": "Regions.Read",
+          "componentName": "RegionManagement",
+          "children": []
+        },
+        {
+          "id": "MENU-013",
+          "parentId": "MENU-010",
+          "name": "BranchManagement",
+          "displayName": "Branch Management",
+          "icon": "BuildingIcon",
+          "path": "/admin/branches",
+          "orderIndex": 3,
+          "isVisible": true,
+          "requiredPermission": "Branches.Read",
+          "componentName": "BranchManagement",
+          "children": []
+        }
+      ]
+    }
+  ],
+  "auditLogs": [
+    {
+      "id": "AUDIT-001",
+      "userId": "4D7E5B41-8F2C-4A9B-9E1D-3C5F7A9B1D2E",
+      "userName": "Sok Chan",
+      "action": "Login",
+      "entityType": "User",
+      "entityId": "4D7E5B41-8F2C-4A9B-9E1D-3C5F7A9B1D2E",
+      "oldValues": null,
+      "newValues": {
+        "loginTime": "2025-01-02T10:30:00Z",
+        "ipAddress": "192.168.1.100"
+      },
+      "ipAddress": "192.168.1.100",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+      "createdAt": "2025-01-02T10:30:00Z"
+    },
+    {
+      "id": "AUDIT-002",
+      "userId": "4D7E5B41-8F2C-4A9B-9E1D-3C5F7A9B1D2E",
+      "userName": "Sok Chan",
+      "action": "Create",
+      "entityType": "User",
+      "entityId": "8H1I9F85-2J6G-8E3F-3I5H-7G9J1E3F5H6I",
+      "oldValues": null,
+      "newValues": {
+        "email": "user@example.com",
+        "firstName": "Visal",
+        "lastName": "Kun"
+      },
+      "ipAddress": "192.168.1.100",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+      "createdAt": "2024-04-01T08:00:00Z"
+    },
+    {
+      "id": "AUDIT-003",
+      "userId": "5E8F6C52-9G3D-5B0C-0F2E-4D6G8B0C2E3F",
+      "userName": "Dara Sok",
+      "action": "Update",
+      "entityType": "Branch",
+      "entityId": "YTP-BRANCH-001",
+      "oldValues": {
+        "phoneNumber": "+855123456788"
+      },
+      "newValues": {
+        "phoneNumber": "+855123456789"
+      },
+      "ipAddress": "192.168.1.101",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+      "createdAt": "2024-06-15T14:20:00Z"
+    },
+    {
+      "id": "AUDIT-004",
+      "userId": "4D7E5B41-8F2C-4A9B-9E1D-3C5F7A9B1D2E",
+      "userName": "Sok Chan",
+      "action": "Create",
+      "entityType": "Region",
+      "entityId": "SR1-REGION-001",
+      "oldValues": null,
+      "newValues": {
+        "code": "SR1/KH0010003/SIEM REAP RO",
+        "name": "Siem Reap Region"
+      },
+      "ipAddress": "192.168.1.100",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+      "createdAt": "2024-01-01T08:00:00Z"
+    },
+    {
+      "id": "AUDIT-005",
+      "userId": "6F9G7D63-0H4E-6C1D-1G3F-5E7H9C1D3F4G",
+      "userName": "Sophea Chea",
+      "action": "Update",
+      "entityType": "User",
+      "entityId": "7G0H8E74-1I5F-7D2E-2H4G-6F8I0D2E4G5H",
+      "oldValues": {
+        "phoneNumber": "+855444555665"
+      },
+      "newValues": {
+        "phoneNumber": "+855444555666"
+      },
+      "ipAddress": "192.168.1.102",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+      "createdAt": "2024-08-10T11:45:00Z"
+    }
+  ],
+  "systemSettings": [
+    {
+      "id": "SETTING-001",
+      "key": "app.name",
+      "value": "Admin Panel",
+      "description": "Application name",
+      "category": "General",
+      "isEncrypted": false,
+      "updatedAt": "2024-01-01T08:00:00Z",
+      "updatedBy": "4D7E5B41-8F2C-4A9B-9E1D-3C5F7A9B1D2E"
+    },
+    {
+      "id": "SETTING-002",
+      "key": "app.version",
+      "value": "1.0.0",
+      "description": "Application version",
+      "category": "General",
+      "isEncrypted": false,
+      "updatedAt": "2024-01-01T08:00:00Z",
+      "updatedBy": "4D7E5B41-8F2C-4A9B-9E1D-3C5F7A9B1D2E"
+    },
+    {
+      "id": "SETTING-003",
+      "key": "security.jwt.expiry",
+      "value": "3600",
+      "description": "JWT token expiry time in seconds",
+      "category": "Security",
+      "isEncrypted": false,
+      "updatedAt": "2024-01-01T08:00:00Z",
+      "updatedBy": "4D7E5B41-8F2C-4A9B-9E1D-3C5F7A9B1D2E"
+    },
+    {
+      "id": "SETTING-004",
+      "key": "email.smtp.host",
+      "value": "smtp.example.com",
+      "description": "SMTP server host",
+      "category": "Email",
+      "isEncrypted": false,
+      "updatedAt": "2024-01-01T08:00:00Z",
+      "updatedBy": "4D7E5B41-8F2C-4A9B-9E1D-3C5F7A9B1D2E"
+    },
+    {
+      "id": "SETTING-005",
+      "key": "email.smtp.port",
+      "value": "587",
+      "description": "SMTP server port",
+      "category": "Email",
+      "isEncrypted": false,
+      "updatedAt": "2024-01-01T08:00:00Z",
+      "updatedBy": "4D7E5B41-8F2C-4A9B-9E1D-3C5F7A9B1D2E"
+    }
+  ]
+}
+

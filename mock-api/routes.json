@@ -1,0 +1,10 @@
+{
+  "/api/*": "/$1",
+  "/api/auth/login": "/login",
+  "/api/auth/register": "/register",
+  "/api/auth/logout": "/logout",
+  "/api/auth/refresh-token": "/refresh-token",
+  "/api/auth/forgot-password": "/forgot-password",
+  "/api/auth/reset-password": "/reset-password"
+}
+

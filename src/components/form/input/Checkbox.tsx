@@ -1,22 +1,24 @@
 import type React from "react";
+import { forwardRef } from "react";
 
-interface CheckboxProps {
+interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   label?: string;
-  checked: boolean;
+  checked?: boolean;
   className?: string;
   id?: string;
-  onChange: (checked: boolean) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
 }
 
-const Checkbox: React.FC<CheckboxProps> = ({
+const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({
   label,
   checked,
   id,
   onChange,
   className = "",
   disabled = false,
-}) => {
+  ...rest
+}, ref) => {
   return (
     <label
       className={`flex items-center space-x-3 group cursor-pointer ${
@@ -25,13 +27,15 @@ const Checkbox: React.FC<CheckboxProps> = ({
     >
       <div className="relative w-5 h-5">
         <input
+          ref={ref}
           id={id}
           type="checkbox"
           className={`w-5 h-5 appearance-none cursor-pointer dark:border-gray-700 border border-gray-300 checked:border-transparent rounded-md checked:bg-brand-500 disabled:opacity-60 
           ${className}`}
           checked={checked}
-          onChange={(e) => onChange(e.target.checked)}
+          onChange={onChange}
           disabled={disabled}
+          {...rest}
         />
         {checked && (
           <svg
@@ -77,6 +81,8 @@ const Checkbox: React.FC<CheckboxProps> = ({
       )}
     </label>
   );
-};
+});
+
+Checkbox.displayName = "Checkbox";
 
 export default Checkbox;
